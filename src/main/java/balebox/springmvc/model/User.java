@@ -1,27 +1,25 @@
 package balebox.springmvc.model;
 
 import javax.persistence.*;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name="name")
-     private String name;
-    @Column(name="last_name")
-     private String lastName;
-    @Column(name="age")
-     private int age;
-    @Column(name="email")
-     private String email;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "age")
+    private int age;
+    @Column(name = "email")
+    private String email;
 
     public User() {
     }
+
     public User(long id, String name, String lastName, int age, String email) {
         this.id = id;
         this.name = name;
