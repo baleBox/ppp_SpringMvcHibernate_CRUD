@@ -14,12 +14,11 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScan("balebox.springmvc")
-
-
 public class HibernateConfig {
+
     private final Environment environment;
 
     @Autowired
@@ -27,11 +26,11 @@ public class HibernateConfig {
         this.environment = environment;
     }
 
-
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("db.driver")));
+        dataSource.setDriverClassName(Objects.requireNonNull(environment
+                .getProperty("db.driver")));
         dataSource.setUrl(environment.getProperty("db.url"));
         dataSource.setUsername(environment.getProperty("db.username"));
         dataSource.setPassword(environment.getProperty("db.password"));
