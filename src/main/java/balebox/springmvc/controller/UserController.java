@@ -23,8 +23,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String getAllUsers(@RequestParam(value = "alluser", required = false) String usernum, Model model) {
-        model.addAttribute("users", userService.getAllUsers(usernum));
+    public String getAllUsers(@RequestParam(value = "alluser", required = false) String userlist, Model model) {
+        model.addAttribute("users", userService.getAllUsers(userlist));
         return "users";
     }
 
@@ -34,23 +34,15 @@ public class UserController {
         return "show";
     }
 
-    @GetMapping("/new_user")
+    @GetMapping("/add")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-        return "new_user";
+        return "add_new_user";
     }
 
     @PostMapping("/create")
-    public String createUser(@RequestParam("name") String name, @RequestParam("lastName") String lastName,
-                             @RequestParam("age") int age, @RequestParam("email") String email, Model model) {
-        User user = new User();
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setAge(age);
-        user.setEmail(email);
-        model.addAttribute("user", user);
+    public String createUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
-
         return "redirect:/users";
     }
 
